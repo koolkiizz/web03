@@ -1,0 +1,120 @@
+body {
+    font-family: Tahoma;
+    padding: 0;
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+}
+.wrapper {
+    max-width: 1176px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#logo {
+    display: block;
+    font-size: 72px;
+    cursor:pointer;
+}
+nav {
+    width: 100%;
+    background-color: #3d82f4;
+    color: white;
+}
+nav:after {
+    clear: both;
+    content:" ";
+    display: block;
+}
+nav ul {
+    list-style: none;
+    padding-left: 0;
+}
+nav ul li {
+    float: left;
+    margin-right: 15px;
+    padding: 10px 7px;
+}
+nav ul li a, nav ul li a:visited {
+    color: white;
+    text-decoration: none;
+}
+nav ul li:hover {
+    background-color: #ea8c05;
+}
+/* form dang nhap */
+#form {
+    width: 500px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: 0px 0px 5px black;
+    padding: 40px;
+    border-radius: 5px;
+}
+form .form-block {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.form-block:after {
+    display: block;
+    clear: both;
+    content: " ";
+}
+.form-block .form-left {
+    float: left;
+    max-width: 30%;
+    width: 30%;
+}
+.form-block .form-right {
+    float: left;
+    max-width: 65%;
+    width: 65%;
+    margin-left: 5%;
+}
+label {
+    font-weight: 700;
+}
+.input-text {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.input-text.input-select {
+    width: 30%;
+    margin-right: 3%;
+}
+.input-text.input-select:last-child {
+    margin-right: 0;
+}
+.smb-button {
+    background-color: #1486d6;
+    border: 1px solid #1e22e4;
+    padding: 5px 13px;
+    display: block;
+    margin: auto;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+/* list user table */
+table {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-spacing: 1px;
+}
+table td {
+    border: 1px solid black;
+}
+footer {
+    width: 100%;
+    background-color: #3d82f4;
+    color: white;
+}
+footer div {
+    text-align: right;
+    padding: 10px 0;
+}
