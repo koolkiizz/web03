@@ -1,3 +1,6 @@
+<?php
+session_start(); //khởi tạo sử dụng session
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +23,7 @@
                     <li><a href="/web03/dangnhap.php">ĐĂNG NHẬP</a></li>
                     <li><a href="/web03/dangky.php">ĐĂNG KÝ</a></li>
                     <li><a href="/web03/listusers.php">LIST USERS</a></li>
+                    <li><a href="/web03/logout.php">LOGOUT</a></li>
                 </ul>
             </div>
         </nav>

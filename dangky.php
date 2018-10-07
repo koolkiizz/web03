@@ -7,6 +7,11 @@ include('connectdb.php');
 <article>
     <div class="wrapper">
         <?php
+        if (isset($_SESSION['user'])) {
+            echo 'Bạn đã đăng nhập, vui lòng thoát khỏi để đăng ký';
+        }
+        ?>
+        <?php
         //đặt đoạn mã xử lý đăng ký ở đây để tiện cho việc hiển thị thông báo sau này
         //kiểm tra người dùng đã submit form hay chưa
         if (isset($_POST['submit'])) {

@@ -5,6 +5,11 @@ include('header.php');
 include('connectdb.php');
  ?>
 <article>
+    <?php
+        if (isset($_SESSION['user'])) {
+            echo 'Bạn đã đăng nhập';
+        }
+        ?>
     <div class="wrapper">
         <table>
             <tr>

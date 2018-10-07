@@ -1,4 +1,4 @@
-<?php 
+<?php
 // hàm include để nhập nội dung file header vào đây
 // hàm này có thể nhập được các mã PHP để xử lý trên file này
 include('header.php');
@@ -6,6 +6,11 @@ include('connectdb.php');
  ?>
 <article>
     <div class="wrapper">
+    <?php
+    if (isset($_SESSION['user'])) {
+    	echo 'Bạn đã đăng nhập';
+    }
+    ?>
     <?php
         //đặt đoạn mã xử lý đăng ký ở đây để tiện cho việc hiển thị thông báo sau này
         //kiểm tra người dùng đã submit form hay chưa
@@ -16,7 +21,7 @@ include('connectdb.php');
             //kiểm tra các thông tin đã nhập đã đầy đủ hay chưa
             if (!$username || !$password) {
                 echo 'Bạn nhập thiếu thông tin!';
-            } else {
+            } elseif (!isset($_SESSION['user'])) {
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành tìm kiếm người dùng trong CSDL
                 $sql = 'select * from users where username="'.$username.'" and password = "'.md5($password).'"';
                 //sử dụng mã hóa MD5 trước khi tìm kiếm để tăng tính bảo mật cho ứng dụng web
@@ -24,7 +29,12 @@ include('connectdb.php');
                 $result = mysqli_query($conn, $sql); //biến $conn được khai báo trong file connectdb
                 if (mysqli_num_rows($result)) {
                     echo 'Đăng nhập thành công!';
+                    $user = mysqli_fetch_array($result);
+                    //var_dump($user);
+                    $_SESSION['user'] = $user['username'];
                 }
+            } else {
+            	echo 'Bạn đã đăng nhập và không thể đăng nhập lại';
             }
         }
         ?>
