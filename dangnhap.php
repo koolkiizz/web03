@@ -7,7 +7,7 @@ include('connectdb.php');
 <article>
     <div class="wrapper">
     <?php
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION['dang_nhap']) && $_SESSION['dang_nhap'] == 1) {
     	echo 'Bạn đã đăng nhập';
     }
     ?>
@@ -31,7 +31,7 @@ include('connectdb.php');
                     echo 'Đăng nhập thành công!';
                     $user = mysqli_fetch_array($result);
                     //var_dump($user);
-                    $_SESSION['user'] = $user['username'];
+                    $_SESSION['dang_nhap'] = 1;
                 }
             } else {
             	echo 'Bạn đã đăng nhập và không thể đăng nhập lại';

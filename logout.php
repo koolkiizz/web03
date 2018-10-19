@@ -1,8 +1,7 @@
 <?php
-include ('header.php');
+session_start();//khởi tạo sử dụng session
 
-session_destroy();
+session_destroy(); //xóa tất cả các session hiện có
 
-echo 'Bạn đã đăng xuất';
-
-include ('footer.php');
+//chuyển hướng về login
+header('Location: login.php');

@@ -1,147 +1,71 @@
 <?php 
 // hàm include để nhập nội dung file header vào đây
 // hàm này có thể nhập được các mã PHP để xử lý trên file này
+$page_title = 'Thêm user';
 include('header.php'); 
-include('connectdb.php');
 ?>
-<article>
-    <div class="wrapper">
-        <?php
-        if (isset($_SESSION['user'])) {
-            echo 'Bạn đã đăng nhập, vui lòng thoát khỏi để đăng ký';
-        }
-        ?>
-        <?php
-        //đặt đoạn mã xử lý đăng ký ở đây để tiện cho việc hiển thị thông báo sau này
-        //kiểm tra người dùng đã submit form hay chưa
-        if (isset($_POST['submit'])) {
-            //nếu submit rồi thì lấy các thông tin đã nhập
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
-            $name = $_POST['name'];
-            $phone = $_POST['phone'];
-            $birthday_day = $_POST['birthday_day'];
-            $birthday_month = $_POST['birthday_month'];
-            $birthday_year = $_POST['birthday_year'];
-            $gender = $_POST['gender'];
-            $address = $_POST['address'];
-            //kiểm tra các thông tin đã nhập đã đầy đủ hay chưa, ở đây cần thiết phải có 4 thông tin đầu tiên
-            if (!$username || !$password || !$email || !$name) {
-                echo 'Bạn nhập thiếu thông tin!';
-            } else {
-                //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-                $sql = 'insert into users(username, password, email, name, phone, birthday, gender, address) values ("'
-                    .$username.'", "'
-                    .md5($password).'", "' //mã hóa password trước khi chèn vào CSDL để tăng bảo mật
-                    .$email.'", "'
-                    .$name.'", "'
-                    .$phone.'", "'
-                    .$birthday_year.'-'.$birthday_month.'-'.$birthday_day.'", "' //định dạng Y-m-d cho kiểu date
-                    .$gender.'", "'
-                    .$address.'")';
-                //thực thi câu lệnh SQL
-                if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb
-                    echo 'Đăng ký thành công!';
-                }
-            }
-        }
-        ?>
-        <div id="form">
-            <form action="" method="post">
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-right">
-                        <input type="text" class="input-text" name="username" id="username" />
-                    </div>
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title">Register</h3>
+            <div class="tile-body">
+              <form class="form-horizontal">
+                <div class="form-group row">
+                  <label class="control-label col-md-3">Name</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Enter full name">
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="password">Password</label>
-                    </div>
-                    <div class="form-right">
-                        <input type="password" class="input-text" name="password" id="password" />
-                    </div>
+                <div class="form-group row">
+                  <label class="control-label col-md-3">Email</label>
+                  <div class="col-md-8">
+                    <input class="form-control col-md-8" type="email" placeholder="Enter email address">
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="email">Email</label>
-                    </div>
-                    <div class="form-right">
-                        <input type="email" class="input-text" name="email" id="email" />
-                    </div>
+                <div class="form-group row">
+                  <label class="control-label col-md-3">Address</label>
+                  <div class="col-md-8">
+                    <textarea class="form-control" rows="4" placeholder="Enter your address"></textarea>
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="name">Name</label>
+                <div class="form-group row">
+                  <label class="control-label col-md-3">Gender</label>
+                  <div class="col-md-9">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="gender">Male
+                      </label>
                     </div>
-                    <div class="form-right">
-                        <input type="text" class="input-text" name="name" id="name" />
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="gender">Female
+                      </label>
                     </div>
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="phone">Phone</label>
-                    </div>
-                    <div class="form-right">
-                        <input type="text" class="input-text" name="phone" id="phone" />
-                    </div>
+                <div class="form-group row">
+                  <label class="control-label col-md-3">Identity Proof</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="file">
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="birthday">Birthday</label>
+                <div class="form-group row">
+                  <div class="col-md-8 col-md-offset-3">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">I accept the terms and conditions
+                      </label>
                     </div>
-                    <div class="form-right">
-                        <select name="birthday_day" class="input-text input-select">
-                            <option value="" hidden></option>
-                            <?php
-                            for($i = 1; $i < 32; $i++) {
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                            }
-                            ?>
-                        </select>
-                        <select name="birthday_month" class="input-text input-select">
-                            <option value="" hidden></option>
-                            <?php
-                            for($i = 1; $i < 13; $i++) {
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                            }
-                            ?>
-                        </select>
-                        <select name="birthday_year" class="input-text input-select">
-                            <option value="" hidden></option>
-                            <?php
-                            for($i = 1950; $i < 2015; $i++) {
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
+                  </div>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="gender">Gender</label>
-                    </div>
-                    <div class="form-right">
-                        <label for="gmale"><input type="radio" name="gender" value="Nam" id="gmale"/>Nam</label>
-                        <label for="gfemale"><input type="radio" name="gender" value="Nữ" id="gfemale"/>Nữ</label>
-                    </div>
+              </form>
+            </div>
+            <div class="tile-footer">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-3">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Register</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                 </div>
-                <div class="form-block">
-                    <div class="form-left">
-                        <label for="address">Address</label>
-                    </div>
-                    <div class="form-right">
-                        <textarea name="address" id="address" cols="30" rows="10" class="input-text"></textarea>
-                    </div>
-                </div>
-                <div class="form-block">
-                    <button type="submit" name="submit" class="smb-button">Đăng ký</button>
-                </div>
-            </form>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</article>
 <?php include('footer.php'); ?>
