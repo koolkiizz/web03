@@ -17,5 +17,6 @@ if (isset($_POST['submit'])) {
 	<input type="submit" class="btn btn-primary" value="SUBMIT" name="submit">
 </form>
 <?php
+//testing from example 2
 include("footer.php");
 ?>
